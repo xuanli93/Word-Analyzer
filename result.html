@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Analyzer</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+  <div class="container">
+    <h1>Most Frequent Words Rank</h1>
+    <p>{{ filename }}</p>
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+            <th scope="col">Word</th>
+            <th scope="col">Count</th> 
+        </tr>
+      </thead>
+
+      	{% for element in result %}
+          <tr>
+            <td>{{ element[0] }}</td>
+            <td>{{ element[1] }}</td> 
+          </tr>
+      	{% endfor %}
+    </table>
+  </div>
+</body>
+</html>
