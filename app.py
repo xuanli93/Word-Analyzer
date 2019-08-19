@@ -7,21 +7,23 @@ app = Flask(__name__)
 FILENAME = ''
 
 @app.route('/upload')
-def upload_file():
+def upload():
    return render_template('upload.html')
 	
 @app.route('/uploader', methods = ['GET', 'POST'])
-def upload_file():
+def uploader():
    if request.method == 'POST':
       f = request.files['file']
+      FILENAME=f.filename
       f.save(secure_filename(f.filename))
-      return 'file uploaded successfully'
-      
+      return (wordCountTable())
+
 @app.route('/result')
 def wordCountTable():
+	print('file uploaded successfully')
 	counter = {}
-	filename= 'oliver_twist.txt'
-	with open(filename,'r') as f:
+	
+	with open(FILENAME,'r') as f:
 		for line in f:
 			for word in line.split():
 				word = word.strip(string.punctuation)
@@ -33,7 +35,7 @@ def wordCountTable():
 
 	result = sorted(counter.items(), key = lambda x: (x[1],x[0]), reverse = True)
 
-	return render_template('result.html', result= result,filename=filename)
+	return render_template('result.html', result= result,filename=FILENAME)
  
 
 if __name__ == '__main__':
